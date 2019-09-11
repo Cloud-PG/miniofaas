@@ -1,0 +1,21 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  processimage:
+    lang: python3
+    handler: ./processimage
+    image: dciangot/processimage:latest
+    environment:
+      write_debug: true
+      minio_hostname: "10.2.201.59:9000"
+      minio_access_key: "dciangot"
+      minio_secret_key: "admindciangot"
+      openfaas_gw: "http://10.2.201.59:31112"
+  facedetect:
+    skip_build: true
+    image: alexellis2/facedetect:0.1
+    environment:
+      output_mode: "image"
+      write_debug: true
